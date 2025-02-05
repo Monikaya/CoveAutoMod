@@ -2,11 +2,11 @@
 using Cove.Server;
 
 // Change the namespace and class name!
-namespace MyCovePlugin
+namespace CoveAutoMod
 {
-    public class MyCovePlugin : CovePlugin
+    public class CoveAutoMod : CovePlugin
     {
-        public MyCovePlugin(CoveServer server) : base(server) { }
+        public CoveAutoMod(CoveServer server) : base(server) { }
 
         public override void onInit()
         {
