@@ -42,6 +42,8 @@ namespace CoveAutoMod
         {
             base.onChatMessage(sender, message);
 
+            message = message.ToLower();
+
             foreach (string banWord in modConfig.BanWords)
             {
                 if (message.Contains(banWord))
