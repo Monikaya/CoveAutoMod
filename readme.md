@@ -8,6 +8,8 @@ CoveAutoMod is a Cove plugin inspired by Raviable's [Void's Extras](https://gith
 
 ## Upcoming Features
 - "Smart" mode. Someone's getting warned too much, maybe they need a kick!
+- Report or VoteKick command.
+- Better admin action logs, so you can keep track of your people.
 
 ## Instructions
 
