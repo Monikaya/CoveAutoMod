@@ -26,4 +26,4 @@ We welcome contributions! Feel free to open issues or submit pull requests.
 
 
 ## Support
-Need help? Join our [Discord Community](https://discord.gg/7PQUdNJVhD) or open an issue!# FishingTalk - Webfishing Server Plugin
+Need help? Join our [Discord Community](https://discord.gg/7PQUdNJVhD) or open an issue!
