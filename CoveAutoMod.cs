@@ -24,6 +24,7 @@ namespace CoveAutoMod
     {
         public ModConfig modConfig;
         public bool WebhookToggle = false;
+        string eventLog = "automodlog.json";
         public CoveAutoMod(CoveServer server) : base(server) { }
 
         public override void onInit()
@@ -36,6 +37,15 @@ namespace CoveAutoMod
             modConfig = JsonConvert.DeserializeObject<ModConfig>(json);
 
             if(!modConfig.LogWebhook.Equals("")) WebhookToggle = true;
+
+            RegisterCommand("report", (player, args) =>
+            {
+                if(args.Length < 2) return;
+
+                string reportedUser = args[0];
+                string reportMessage = string.Join(" ", args[1..args.Length]);
+                userReport(player, reportedUser, reportMessage);
+            });
         }
 
         public override void onChatMessage(WFPlayer sender, string message)
@@ -73,10 +83,25 @@ namespace CoveAutoMod
             }
         }
 
-        public void logModerationAction(WFPlayer sender, string message, string action)
+        public void userReport(WFPlayer sender, string reportedUser, string message)
         {
-            string eventLog = "automodlog.json";
+            string formatMessage = "----------------------------------------" + "\n"
+                + "User: " + sender.Username + " has sent in a report. Please review this and do something pls" + "\n"
+                + "Reported User: " + reportedUser + "\n"
+                + "Report Message: " + message;
 
+            using (StreamWriter writer = File.AppendText(eventLog))
+            {
+                writer.WriteLine(formatMessage);
+            }
+
+            if(WebhookToggle) sendWebhookMessage(formatMessage);
+
+            SendPlayerChatMessage(sender, "Your report has been recieved! We will look at it and make a decision, thanks!");
+        }
+
+        public void logModerationAction(WFPlayer sender, string message, string action)
+        {            
             string logMessage = "----------------------------------------" + "\n"
                 + "Player Name: " + sender.Username + "\n"
                 + "Player Message: " + message + "\n"
@@ -90,14 +115,23 @@ namespace CoveAutoMod
 
             if(WebhookToggle)
             {
-                NameValueCollection discordValues = new NameValueCollection();
-                discordValues.Add("username", "CoveAutoMod");
-                discordValues.Add("avatar_url", "https://i.imgur.com/5pQ9KKr.png");
-                discordValues.Add("content", logMessage);
-                new WebClient().UploadValues(modConfig.LogWebhook, discordValues);
+                sendWebhookMessage(logMessage);
             }
-
         }
 
+        public void sendWebhookMessage(string message)
+        {
+            NameValueCollection discordValues = new NameValueCollection();
+            discordValues.Add("username", "CoveAutoMod");
+            discordValues.Add("avatar_url", "https://i.imgur.com/5pQ9KKr.png");
+            discordValues.Add("content", message);
+            new WebClient().UploadValues(modConfig.LogWebhook, discordValues);            
+        }
+
+        public override void onEnd()
+        {
+            base.onEnd();
+            UnregisterCommand("report");
+        }
     }
 }

@@ -5,6 +5,7 @@ CoveAutoMod is a Cove plugin inspired by Raviable's [Void's Extras](https://gith
 ## Features
 - 💬 **Granular Word Categories** – Decide what words trigger certain actions.
 - 🔄 **Get notified on Discord** – Any action taken can be sent to a Discord channel for review.
+- **Report command** - Allow users to report bad actors so you can stay ontop of moderation.
 
 ## Upcoming Features
 - "Smart" mode. Someone's getting warned too much, maybe they need a kick!
