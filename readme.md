@@ -1,4 +1,4 @@
-# FishingTalk - Webfishing Server Plugin
+# CoveAutoMod - Webfishing Server Plugin
 
 CoveAutoMod is a Cove plugin inspired by Raviable's [Void's Extras](https://github.com/Raviable/VoidExtras/releases/tag/mainrel) plugin for Webfishing that allows you to control how your Cove server handles inappropriate messages. Configure your server however you'd like to prevent people from ruining the fun! It's super easy to use, and will save you a lot of time.
 
